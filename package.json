@@ -1,0 +1,13 @@
+{
+  "name": "tf-js",
+  "version": "1.0.0",
+  "main": "script.js",
+  "license": "MIT",
+  "dependencies": {
+    "@tensorflow-models/mobilenet": "latest",
+    "@tensorflow/tfjs": "latest",
+    "@tensorflow/tfjs-node": "latest",
+    "jpeg-js": "latest",
+    "node-fetch": "latest"
+  }
+}
