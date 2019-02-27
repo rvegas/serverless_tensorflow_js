@@ -7,8 +7,9 @@ tooling.
 
 ### Dockerfile explained
   
-The base for this dockerfile is `openwhisk/action-nodejs-v8:latest` which 
-is part of [ibmcloud](https://console.bluemix.net/openwhisk/)'s serverless 
+The base for this dockerfile is  
+`openwhisk/action-nodejs-v8:latest`  
+which is part of [ibmcloud](https://console.bluemix.net/openwhisk/)'s serverless 
 cloud functions.
   
 The idea is that we use this image in order to be able to execute 
@@ -16,10 +17,12 @@ image classification requests via HTTP calls rather than holding the
 whole infrastructure of ML with Tensorflow JS.
   
 Next we simply install the necessary libraries to run image classification 
-using mobilenet by running `RUN npm install @tensorflow/tfjs @tensorflow-models/mobilenet @tensorflow/tfjs-node jpeg-js`.
+using mobilenet by running  
+`RUN npm install @tensorflow/tfjs @tensorflow-models/mobilenet @tensorflow/tfjs-node jpeg-js`.
   
 Finally we copy the entire pretrained models into the corresponding 
-directory for our script to run with `COPY mobilenet mobilenet`.
+directory for our script to run with  
+`COPY mobilenet mobilenet`.
   
 ### Instructions for running as a cloud function
   
@@ -60,7 +63,7 @@ docker installed, you may skip to step 6.
 ```ibmcloud fn action invoke classify -r -p image $(base64 ../panda.jpg)```  
 
 13. If step 12 fails due to encoding and command size, you can also do it via postman using 
-pages like this:  https://www.browserling.com/tools/image-to-base64  
+tools like [this](https://www.browserling.com/tools/image-to-base64)  
   13.1. You can also invoke the cloud function via HTTP with curl or postman.  
   
 14. If you completed all steps with no issues you should get a response like this:  
