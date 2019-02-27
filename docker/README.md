@@ -65,6 +65,7 @@ docker installed, you may skip to step 6.
 13. If step 12 fails due to encoding and command size, you can also do it via postman using 
 tools like [this](https://www.browserling.com/tools/image-to-base64)  
   13.1. You can also invoke the cloud function via HTTP with curl or postman.  
+  13.2. You can find tons of images for testing [here](https://picsum.photos/).
   
 14. If you completed all steps with no issues you should get a response like this:  
 ```
