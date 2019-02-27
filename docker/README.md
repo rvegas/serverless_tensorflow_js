@@ -53,6 +53,7 @@ docker installed, you may skip to step 6.
 
 9. Login to your ibmcloud account [Be aware of the organization and regions]:    
 ```ibmcloud login -a cloud.ibm.com -o "ricardovegas@gmail.com" -s "dev"```  
+  9.1. If you find an error login in, check your region [here](https://console.bluemix.net/account/organizations/)
 
 10. Create a cloud action with the cli:  
 ```ibmcloud fn action create classify --docker rvegas/action-nodejs-v8:tfjs index.js```  
