@@ -1,8 +1,7 @@
 ## Docker para Mobilenet TF + JS
 
-En esta imagen de docker se incluye 
-[mobilenet](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html)'s 
-tooling.
+En esta imagen de docker se incluye todas las herramientas de 
+[mobilenet](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html).
 
 ### Que hay dentro del Docker?
   
