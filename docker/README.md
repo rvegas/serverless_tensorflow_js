@@ -19,7 +19,7 @@ Primero tenemos que tener instaladas las librerias dentro de Docker
 luego copiamos los modelos enteros para que node los pueda utilizar  
 `COPY mobilenet mobilenet`.
   
-### Instructions for running as a cloud function
+### Como convertimos esto en un cloud function?
   
 1. Build:  
 ```docker build -t tfjs .```
