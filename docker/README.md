@@ -23,18 +23,18 @@ luego copiamos los modelos enteros para que node los pueda utilizar
   
 1. Build:  
 ```docker build -t tfjs .```
-
+  
 2. Log in en [docker hub](https://hub.docker.com/):  
 ```docker login```
-
+  
 3. Taggea la imagen que haz creado en el paso 1 [reemplaza <USERNAME> con tu usuario de docker hub]:  
-```docker tag tfjs <USERNAME>/action-nodejs-v8:tfjs```
-
+```docker tag tfjs <USERNAME>/action-nodejs-v8:tfjs```  
+  
 4. Push:  
-```docker push <USERNAME>/action-nodejs-v8:tfjs```
-
+```docker push <USERNAME>/action-nodejs-v8:tfjs```  
+  
 5. Asegurate de que [existe](https://hub.docker.com/r/rvegas/action-nodejs-v8/) la imagen que has creado.  
-
+  
 6. Instala el[ibmcloud CLI tool](https://console.bluemix.net/openwhisk/learn/cli).  
   7.1. ```tar -xzf IBM_Cloud_CLI_0.14.0_amd64.tar.gz```  
   7.2. ```cd Bluemix_CLI```  
@@ -42,19 +42,19 @@ luego copiamos los modelos enteros para que node los pueda utilizar
   
 7. Instala el cloud functions plugin:  
 ```ibmcloud plugin install cloud-functions```  
-
+  
 8. Login en ibm [Presta atencion a las regiones]:  
 ```ibmcloud login -a cloud.ibm.com -o "ricardovegas@gmail.com" -s "dev"```  
   9.1. En caso de error sobre region, revisa [aqui](https://console.bluemix.net/account/organizations/)  
-
-9.Crea un cloud action (serverless cloud function):  
+  
+9. Crea un cloud action (serverless cloud function):  
 ```ibmcloud fn action create classify --docker rvegas/action-nodejs-v8:tfjs index.js```  
-
-10. ASegurate de que se ha creado en tu [dashboard](https://console.bluemix.net/openwhisk/actions)  
-
+  
+10. Asegurate de que se ha creado en tu [dashboard](https://console.bluemix.net/openwhisk/actions)  
+  
 11. Finalmente puedes invocarla via CLI, escoge una imagen:  
 ```ibmcloud fn action invoke classify -r -p image $(base64 ../panda.jpg)```  
-
+  
 12. Si el encoding de la imagen puedes pasarla a base 64 con [esto](https://www.browserling.com/tools/image-to-base64)  
   12.1. Puedes invocar la funcion con cURL y Postman si lo deseas.  
   12.2. Imagenes para prueba [aqui](https://picsum.photos/).  
