@@ -1,74 +1,66 @@
-## Docker image for Mobilenet TF + JS
+## Docker para Mobilenet TF + JS
 
-This dockerfile contains the libraries and pre-trained models 
-for running prediction-based image classification using 
+En esta imagen de docker se incluye  
 [mobilenet](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html)'s 
 tooling.
 
-### Dockerfile explained
+### Que hay dentro del Docker?
   
-The base for this dockerfile is  
+La base de esta imagen de docker es esta  
 `openwhisk/action-nodejs-v8:latest`  
-which is part of [ibmcloud](https://console.bluemix.net/openwhisk/)'s serverless 
-cloud functions.
+la cual es parte de las cloud functions serverless de [ibmcloud](https://console.bluemix.net/openwhisk/)'s.
   
-The idea is that we use this image in order to be able to execute 
-image classification requests via HTTP calls rather than holding the 
-whole infrastructure of ML with Tensorflow JS.
+La idea es usar esta imagen para utilizar las capacidades serverless 
+de ibm cloud de montar toda la arquitectura y plataforma por nosotros 
+mientras solo nos preocupamos por hacer llamadas REST.
   
-Next we simply install the necessary libraries to run image classification 
-using mobilenet by running  
+Primero tenemos que tener instaladas las librerias dentro de Docker
 `RUN npm install @tensorflow/tfjs @tensorflow-models/mobilenet @tensorflow/tfjs-node jpeg-js`.
   
-Finally we copy the entire pretrained models into the corresponding 
-directory for our script to run with  
+luego copiamos los modelos enteros para que node los pueda utilizar
 `COPY mobilenet mobilenet`.
   
 ### Instructions for running as a cloud function
   
-1. If you're not building the image yourself because you don't have 
-docker installed, you may skip to step 6.
-
-2. Build the docker image:  
+1. Build:  
 ```docker build -t tfjs .```
 
-3. Make sure you're logged in on [docker hub](https://hub.docker.com/):  
+2. Log in en [docker hub](https://hub.docker.com/):  
 ```docker login```
 
-4. Tag the image you built in step 2 [replace <USERNAME> with your docker hub username]:  
+3. Taggea la imagen que haz creado en el paso 1 [reemplaza <USERNAME> con tu usuario de docker hub]:  
 ```docker tag tfjs <USERNAME>/action-nodejs-v8:tfjs```
 
-5. Push the image to your docker hub account [make sure it's public]:  
+4. Push:  
 ```docker push <USERNAME>/action-nodejs-v8:tfjs```
 
-6. Make sure the image you're using for the cloud function [exists](https://hub.docker.com/r/rvegas/action-nodejs-v8/)  
+5. Asegurate de que [existe(https://hub.docker.com/r/rvegas/action-nodejs-v8/)  
 
-7. Install the [ibmcloud CLI tool](https://console.bluemix.net/openwhisk/learn/cli).  
+6. Instala el[ibmcloud CLI tool](https://console.bluemix.net/openwhisk/learn/cli).  
   7.1. ```tar -xzf IBM_Cloud_CLI_0.14.0_amd64.tar.gz```  
   7.2. ```cd Bluemix_CLI```  
   7.3. ```sudo ./install```  
   
-8. Install the cloud functions plugin:  
+7. Instala el cloud functions plugin:  
 ```ibmcloud plugin install cloud-functions```  
 
-9. Login to your ibmcloud account [Be aware of the organization and regions]:    
+8. Login en ibm [Presta atencion a las regiones]:    
 ```ibmcloud login -a cloud.ibm.com -o "ricardovegas@gmail.com" -s "dev"```  
-  9.1. If you find an error login in, check your region [here](https://console.bluemix.net/account/organizations/)
+  9.1. En caso de error sobre region, revisa [aqui](https://console.bluemix.net/account/organizations/)
 
-10. Create a cloud action with the cli:  
+9.Crea un cloud action (serverless cloud function):  
 ```ibmcloud fn action create classify --docker rvegas/action-nodejs-v8:tfjs index.js```  
 
-11. Make sure the action is created in your [dashboard](https://console.bluemix.net/openwhisk/actions)  
+10. ASegurate de que se ha creado en tu [dashboard](https://console.bluemix.net/openwhisk/actions)  
 
-12. Finally invoke the action with the CLI:  
+11. Finalmente puedes invocarla via CLI, escoge una imagen:  
 ```ibmcloud fn action invoke classify -r -p image $(base64 ../panda.jpg)```  
 
-13. If step 12 fails due to encoding and command size, you can also do it via postman using 
-tools like [this](https://www.browserling.com/tools/image-to-base64)  
-  13.1. You can also invoke the cloud function via HTTP with curl or postman.  
-  13.2. You can find tons of images for testing [here](https://picsum.photos/).
+12. Si el encoding de la imagen puedes pasarla a base 64 con [esto](https://www.browserling.com/tools/image-to-base64)  
+  12.1. Puedes invocar la funcion con cURL y Postman si lo deseas.  
+  12.2. Imagenes para prueba [aqui](https://picsum.photos/).
   
-14. If you completed all steps with no issues you should get a response like this:  
+13. Si has hecho todo bien deberias recibir esto:  
 ```
 {
     "activationId": "a976d55d128b4413b6d55d128bc41333",
