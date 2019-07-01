@@ -4,7 +4,7 @@
   "main": "script.js",
   "license": "MIT",
   "dependencies": {
-    "@tensorflow-models/mobilenet": "latest",
+    "@tensorflow-models/mobilenet": "1.0.1",
     "@tensorflow/tfjs": "latest",
     "@tensorflow/tfjs-node": "latest",
     "jpeg-js": "latest",
